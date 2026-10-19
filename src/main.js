@@ -232,7 +232,7 @@ function draw() {
   } else if (state === 'title') {
     banner('ASTEROID DOGE', 'Dodge the rocks. Survive the dark.', 'Arrows / WASD / touch to steer. Press Space or tap to launch.');
   } else {
-    banner('WRECKED', `Score ${Math.floor(elapsed * 10)}  \u00b7  Best ${best}`, 'Press Space or tap to try again.');
+    banner('REKD', `Score ${Math.floor(elapsed * 10)}  \u00b7  Best ${best}`, 'Press Space or tap to try again.');
   }
 }
 
