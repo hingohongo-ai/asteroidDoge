@@ -2,6 +2,7 @@ import './style.css';
 
 // ---------- setup ----------
 const canvas = document.getElementById('game');
+const homeLink = document.getElementById('home');
 const ctx = canvas.getContext('2d');
 let W = 0;
 let H = 0;
@@ -47,6 +48,8 @@ window.addEventListener('keydown', (e) => {
   const k = e.key.toLowerCase();
   keys.add(k);
   if ([' ', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k)) e.preventDefault();
+  // Space/Enter on the home link should follow the link, not start a round.
+  if (e.target === homeLink) return;
   if ((k === ' ' || k === 'enter') && canStart()) start();
 });
 window.addEventListener('keyup', (e) => keys.delete(e.key.toLowerCase()));
@@ -70,6 +73,7 @@ function canStart() {
 // ---------- game flow ----------
 function start() {
   state = 'play';
+  homeLink.hidden = true; // keep the HUD clear while playing
   elapsed = 0;
   spawnTimer = 0;
   asteroids = [];
@@ -80,6 +84,7 @@ function start() {
 
 function gameOver() {
   state = 'over';
+  homeLink.hidden = false; // way back to the front door
   overAt = performance.now();
   const score = Math.floor(elapsed * 10);
   if (score > best) {
